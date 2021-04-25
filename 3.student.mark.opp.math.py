@@ -12,7 +12,7 @@ class Student:
         self.name = name_s
         self.dob = dob
         Student.append(self)
-        Student_ID.append(self.id)
+        Student_ID.append(self.id_s)
         self.marks = {}
 
     def add_id(self):
