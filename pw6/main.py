@@ -8,12 +8,10 @@ from domain.Mark import *
 py = curses.initscr()
 curses.start_color()
 
-file_name = "student.dat"
-with zipfile.ZipFile(file_name, "r") as zip:
-    zip.extractall()
+data_file = open("students.dat")
+data = pickle.load(data_file)
     
 f = open("/home/phamlethuylinh/pp2021/pw5/students.txt")
-
 
 s = int(numberofstudent())
 m = 1
@@ -28,8 +26,6 @@ while p <= c:
     add_course()
 course()
 mark()
-f = open("/home/phamlethuylinh/pp2021/pw5/students.txt")
-
 
 print("  Choose  ")
 print("1=YESsss")
@@ -41,10 +37,13 @@ for i in range(0, len(course)):
         mark()
         break
     else:
-        zip_file = zipfile.ZipFile("student.dat", "w", zipfile.ZIP_DEFLATED)
-        zip_file.write("student.txt")
-        zip_file.write("course.txt")
-        zip_file.write("mark.txt")
+    	 pickle_file = open("students.dat", "ab")
+        for student in students:
+            pickle.dump(student, pickle_file)
+        for course in courses:
+            pickle.dump(course, pickle_file)
+        for mark in marks:
+            pickle.dump(mark, pickle_file)
         break
 l = ave_gpa()
 l.getave_gpa()
